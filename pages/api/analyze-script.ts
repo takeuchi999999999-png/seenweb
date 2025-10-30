@@ -64,6 +64,11 @@ export default async function handler(
       }
     });
 
+    // --- Thêm kiểm tra an toàn trước khi đọc text ---
+    if (!response || !response.text) {
+      throw new Error("Phản hồi từ AI không hợp lệ hoặc rỗng.");
+    }
+
     const jsonString = response.text.trim();
     let parsedOutput: AnalyzeResponse;
     try {
